@@ -26,13 +26,13 @@ const layoutStyles = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  minHeight: '90vh'
+  minHeight: '86vh'
 };
 
 function Header() {
   return (
     <div style={{ ...HeaderStyles }}>
-      <span>Sparta Coding Club - Let's learn React</span>
+      <span>맛집 추천은 77 matzo</span>
     </div>
   );
 }
@@ -40,7 +40,7 @@ function Header() {
 function Footer() {
   return (
     <div style={{ ...FooterStyles }}>
-      <span>copyright @SCC</span>
+      <span>copyright @77matzo</span>
     </div>
   );
 }
