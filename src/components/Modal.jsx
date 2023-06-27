@@ -1,12 +1,91 @@
 import { createPortal } from 'react-dom';
+import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 import '../color.css';
-import Input from '../shared/Input';
+import { Input } from '../shared/Input';
 import { BlueButton, GrayButton } from '../shared/Buttons';
+import { useEffect, useState } from 'react';
+import { auth } from '../firebase';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile
+} from 'firebase/auth';
+import { getUsers } from '../redux/modules/users';
 
 export const PORTAL_MODAL = 'portal-root';
 
-const Modal = ({ name, isOpen, setIsOpen }) => {
+const Modal = ({ type, isOpen, setIsOpen }) => {
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      console.log('사용자 정보 user', user);
+    });
+  }, []);
+
+  const onChange = (event) => {
+    const {
+      target: { name, value }
+    } = event;
+    if (name === 'name') {
+      setName(value);
+    }
+    if (name === 'email') {
+      setEmail(value);
+    }
+    if (name === 'password') {
+      setPassword(value);
+    }
+  };
+
+  const SignUp = async (event) => {
+    event.preventDefault();
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('회원가입한 유저', userCredential);
+      await updateProfile(auth.currentUser, { displayName: name });
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('회원가입 에러', errorCode, errorMessage);
+    }
+  };
+
+  const SignIn = async (event) => {
+    event.preventDefault();
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      dispatch(
+        getUsers({
+          id: userCredential.user.uid,
+          name: userCredential.user.displayName,
+          email: userCredential.user.email
+        })
+      );
+
+      console.log('로그인한 user', userCredential.user);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('로그인 에러', errorCode, errorMessage);
+    }
+  };
+
+  const SignOut = async (event) => {
+    event.preventDefault();
+    await signOut(auth);
+  };
+
   const closeHandler = () => {
     setIsOpen(false);
   };
@@ -15,12 +94,17 @@ const Modal = ({ name, isOpen, setIsOpen }) => {
     ? createPortal(
         <Outer>
           <Inner>
-            {name === 'logIn' ? '로그인이 필요해요 :)' : '회원가입을 해볼까요?'}
-            <Input />
-            <Input />
-            {name === 'signUp' ? <Input /> : null}
+            {type === 'signIn' ? '로그인이 필요해요 :)' : '회원가입을 해볼까요?'}
+            {type === 'signUp' ? <Input name="name" value={name} onChange={onChange} placeholder="이름" /> : null}
+            <Input type="email" name="email" value={email} onChange={onChange} placeholder="이메일" />
+            <Input type="password" name="password" value={password} onChange={onChange} placeholder="비밀번호" />
             <StButtonSet>
-              <BlueButton>{name === 'logIn' ? '로그인' : '회원가입'}</BlueButton>
+              {type === 'signIn' ? (
+                <BlueButton onClick={SignIn}>로그인</BlueButton>
+              ) : (
+                <BlueButton onClick={SignUp}>회원가입</BlueButton>
+              )}
+              <BlueButton onClick={SignOut}>로그아웃</BlueButton>
               <GrayButton onClick={closeHandler}>닫기</GrayButton>
             </StButtonSet>
           </Inner>

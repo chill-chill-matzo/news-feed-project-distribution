@@ -1,8 +1,8 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-export function Input() {
-  return <TextInput></TextInput>;
+export function Input({ ...props }) {
+  return <TextInput {...props}></TextInput>;
 }
 
 export function TitleInput({ children }) {

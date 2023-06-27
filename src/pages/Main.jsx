@@ -3,21 +3,25 @@ import MostLikedPost from '../components/MostLikedPost';
 import NewestPost from '../components/NewestPost';
 import { styled } from 'styled-components';
 import Modal from '../components/Modal';
+import { BlueButton } from '../shared/Buttons';
 // import ModalSignUp from '../components/ModalSignUp';
 
 function Main() {
   const [isLogInOpen, setIsLogInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+
+  // const navigate = useNavigate();
   return (
     <>
       <StAside>
         <StButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</StButton>
-        {isLogInOpen && <Modal name="logIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
+        {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
         <StButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</StButton>
-        {isSignUpOpen && <Modal name="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
+        {isSignUpOpen && <Modal type="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
       </StAside>
       <MostLikedPost />
       <NewestPost />
+      {/* <BlueButton onClick={} >마이페이지</BlueButton> */}
     </>
   );
 }
@@ -31,21 +35,18 @@ const StAside = styled.aside`
 
   height: 40px;
 
-  padding: 10px;
-  padding-right: 30px;
+  padding: 8px;
+  padding-right: 15px;
   gap: 10px;
 
   background-color: var(--color_white1);
-
-  color: var(--color_gray1);
-  font-weight: 700;
 `;
 
 const StButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--color_gray1);
   cursor: pointer;
 `;
