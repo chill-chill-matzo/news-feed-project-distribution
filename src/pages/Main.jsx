@@ -1,7 +1,14 @@
 import React from 'react';
+import MostLikedPost from '../components/MostLikedPost';
+import NewestPost from '../components/NewestPost';
 
 function Main() {
-  return <div>Main</div>;
+  return (
+    <>
+      <MostLikedPost />
+      <NewestPost />
+    </>
+  );
 }
 
 export default Main;
