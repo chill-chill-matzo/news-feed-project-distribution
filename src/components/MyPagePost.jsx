@@ -1,15 +1,29 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
+// import { useParams } from 'react-router-dom';
 
 const MyPagePost = () => {
+  const users = useSelector((state) => state.users);
+  console.log(users);
+
+  // const params = useParams();
+
+  // const foundUser = users.find((user) => {
+  //   return user.id === params.id;
+  // });
+  // console.log(foundUser);
+
+  console.log('users제발제발', users);
+
   return (
     <>
       <StContainer>
         <StInfo>
           <StImage></StImage>
           <div>
-            <StGreeting>칠칠맞조 님, 안녕하세요!</StGreeting>
-            <StEmail>77matzo@sparta.com</StEmail>
+            <StGreeting>{users.name}님, 안녕하세요!</StGreeting>
+            <StEmail>email</StEmail>
           </div>
         </StInfo>
 
