@@ -27,7 +27,7 @@ const Grid = styled.div`
 const Img = styled.img`
   justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 200px;
-  margin: 30px;
+  width: 230px;
+  height: 230px;
+  margin: 20px;
 `;
