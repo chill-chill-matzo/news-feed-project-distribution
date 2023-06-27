@@ -18,6 +18,7 @@ const TextInput = styled.input`
   padding: 7px 10px;
   border: 1.5px solid var(--color_gray2);
   border-radius: 12px;
+  margin: 10px;
 `;
 
 const Title = styled.input`

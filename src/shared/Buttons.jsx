@@ -1,12 +1,12 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-export function BlueButton({ children }) {
-  return <Blue>{children}</Blue>;
+export function BlueButton({ children, ...props }) {
+  return <Blue {...props}>{children}</Blue>;
 }
 
-export function GrayButton({ children }) {
-  return <Gray>{children}</Gray>;
+export function GrayButton({ children, ...props }) {
+  return <Gray {...props}>{children}</Gray>;
 }
 
 const Blue = styled.button`

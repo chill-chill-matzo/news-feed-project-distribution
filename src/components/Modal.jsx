@@ -1,6 +1,8 @@
 import { createPortal } from 'react-dom';
 import { styled } from 'styled-components';
 import '../color.css';
+import Input from '../shared/Input';
+import { BlueButton, GrayButton } from '../shared/Buttons';
 
 export const PORTAL_MODAL = 'portal-root';
 
@@ -13,12 +15,13 @@ const Modal = ({ name, isOpen, setIsOpen }) => {
     ? createPortal(
         <Outer>
           <Inner>
-            {name === 'logIn' ? '로그인' : '회원가입'}
-            <input />
-            <input />
+            {name === 'logIn' ? '로그인이 필요해요 :)' : '회원가입을 해볼까요?'}
+            <Input />
+            <Input />
+            {name === 'signUp' ? <Input /> : null}
             <StButtonSet>
-              <button>{name === 'logIn' ? '로그인' : '회원가입'}</button>
-              <button onClick={closeHandler}>닫기</button>
+              <BlueButton>{name === 'logIn' ? '로그인' : '회원가입'}</BlueButton>
+              <GrayButton onClick={closeHandler}>닫기</GrayButton>
             </StButtonSet>
           </Inner>
         </Outer>,
@@ -49,10 +52,7 @@ const Inner = styled.div`
   justify-items: center;
   align-items: center;
 
-  width: 700px;
-  height: 500px;
-
-  padding: 30px;
+  padding: 100px;
 
   background-color: var(--color_white1);
 
