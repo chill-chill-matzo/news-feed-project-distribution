@@ -74,6 +74,7 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
       );
 
       console.log('로그인한 user', userCredential.user);
+      setIsOpen(false);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
