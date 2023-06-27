@@ -1,7 +1,11 @@
 import React from 'react';
+import DetailPost from '../components/DetailPost';
+
 
 function Detail() {
-  return <div>Detail</div>;
+  return <>
+  <DetailPost/>
+  </>;
 }
 
 export default Detail;
