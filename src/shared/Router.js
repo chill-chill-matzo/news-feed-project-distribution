@@ -3,6 +3,7 @@ import Main from '../pages/Main';
 import Detail from '../pages/Detail';
 import MyPage from '../pages/MyPage';
 import Layout from './Layout';
+import AddPost from '../pages/AddPost';
 
 const Router = () => {
   return (
@@ -12,6 +13,7 @@ const Router = () => {
           <Route path="/" element={<Main />} />
           <Route path="detail" element={<Detail />} />
           <Route path="mypage" element={<MyPage />} />
+          <Route path="addpost" element={<AddPost />} />
         </Routes>
       </Layout>
     </BrowserRouter>
