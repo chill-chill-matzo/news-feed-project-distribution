@@ -11,10 +11,6 @@ function Layout({ children }) {
       <IconCherry />
 
       <StContainer>
-        <StAside>
-          <nav>로그인</nav>
-          <nav>회원가입</nav>
-        </StAside>
         <StBody>{children}</StBody>
       </StContainer>
 
@@ -44,28 +40,10 @@ const StContainer = styled.div`
   background-color: var(--color_white1);
 `;
 
-const StAside = styled.aside`
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  height: 50px;
-
-  padding: 10px;
-  padding-right: 30px;
-  gap: 20px;
-
-  background-color: var(--color_white1);
-
-  color: var(--color_gray1);
-  font-weight: 700;
-`;
-
 const StBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 `;
 
 const StFooter = styled.div`
