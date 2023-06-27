@@ -12,8 +12,7 @@ function Layout({ children }) {
 
       <StContainer>
         <StAside>
-          <StNav>로그인</StNav>
-          <br />
+          <nav>로그인</nav>
           <nav>회원가입</nav>
         </StAside>
         <StBody>{children}</StBody>
@@ -33,7 +32,6 @@ const StLayout = styled.div`
 
   max-width: 1200px;
   min-width: 800px;
-  height: 1200px;
 
   margin: 0 auto;
 
@@ -55,15 +53,12 @@ const StAside = styled.aside`
 
   padding: 10px;
   padding-right: 30px;
+  gap: 20px;
 
   background-color: var(--color_white1);
 
   color: var(--color_gray1);
   font-weight: 700;
-`;
-
-const StNav = styled.nav`
-  margin-right: 20px;
 `;
 
 const StBody = styled.div`
@@ -75,5 +70,6 @@ const StBody = styled.div`
 
 const StFooter = styled.div`
   margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 12px;
 `;
