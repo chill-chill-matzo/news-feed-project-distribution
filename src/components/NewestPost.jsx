@@ -3,15 +3,17 @@ import { styled } from 'styled-components';
 
 function NewestPost() {
   return (
-    <Grid>
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-      <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-    </Grid>
+    <>
+      <Grid>
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+      </Grid>
+    </>
   );
 }
 
