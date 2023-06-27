@@ -4,13 +4,17 @@ import NewestPost from '../components/NewestPost';
 import { styled } from 'styled-components';
 import Modal from '../components/Modal';
 import { BlueButton } from '../shared/Buttons';
-// import ModalSignUp from '../components/ModalSignUp';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Main() {
   const [isLogInOpen, setIsLogInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
-  // const navigate = useNavigate();
+  const users = useSelector((state) => state.users);
+  console.log('users 제발 나와줘 제발', users.id, users.name, users.password);
+
+  const navigate = useNavigate();
   return (
     <>
       <StAside>
@@ -21,7 +25,13 @@ function Main() {
       </StAside>
       <MostLikedPost />
       <NewestPost />
-      {/* <BlueButton onClick={} >마이페이지</BlueButton> */}
+      <BlueButton
+        onClick={() => {
+          navigate('mypage');
+        }}
+      >
+        마이페이지
+      </BlueButton>
     </>
   );
 }

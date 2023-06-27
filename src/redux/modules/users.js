@@ -20,7 +20,7 @@ const users = (state = initialState, { type, payload }) => {
   console.log('리듀서에서 찍은 state', payload);
   switch (type) {
     case GET_USERS:
-      return [...state, { payload }];
+      return [...state, payload];
     default:
       return state;
   }
