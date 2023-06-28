@@ -50,7 +50,7 @@ const Gray = styled.button`
 const Text = styled.button`
   background-color: transparent;
   border: none;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--color_gray1);
   cursor: pointer;
