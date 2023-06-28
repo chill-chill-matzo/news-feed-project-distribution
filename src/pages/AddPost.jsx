@@ -4,9 +4,13 @@ import { styled } from 'styled-components';
 import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
+
 import { useSelector } from 'react-redux';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage, auth } from '../firebase';
+
+import { useNavigate } from 'react-router-dom';
+
 
 const AddPost = () => {
   const users = useSelector((state) => state.users);
@@ -84,6 +88,8 @@ const AddPost = () => {
     setContent('');
   };
 
+  const navigate = useNavigate();
+
   return (
     <Div>
       <p>여러분의 맛집을 추천해주세요!</p>
@@ -94,7 +100,13 @@ const AddPost = () => {
         <ButtonsContainer>
           <input type="file" onChange={handleFileSelect} />
           <div>
-            <BlueButton>취소</BlueButton>
+            <BlueButton
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              취소
+            </BlueButton>
             <BlueButton onClick={addNewPost}>등록</BlueButton>
           </div>
         </ButtonsContainer>

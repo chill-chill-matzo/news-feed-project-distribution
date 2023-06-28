@@ -36,6 +36,7 @@ const DetailImage = styled.div`
 
 const DetailContainer = styled.div`
   width: 87%;
+  min-height: 200px;
   margin: 20px auto 20px;
 
   h1 {
