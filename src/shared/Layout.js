@@ -1,8 +1,6 @@
 import React from 'react';
 import '../reset.css';
-import '../color.css';
 import { IconCherry } from './IconCherry';
-
 import { styled } from 'styled-components';
 
 function Layout({ children }) {
@@ -46,7 +44,7 @@ const StBody = styled.div`
   justify-content: center;
 `;
 
-const StFooter = styled.div`
+const StFooter = styled.footer`
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 12px;
