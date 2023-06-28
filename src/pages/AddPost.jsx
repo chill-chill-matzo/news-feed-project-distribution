@@ -1,22 +1,10 @@
-import React, { useState } from 'react';
 import { TitleInput, ContentInput } from '../shared/Input';
 import { BlueButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
-import Modal from '../components/Modal';
-import { TextButton } from '../shared/Buttons';
 
 function AddPost() {
-  const [isLogInOpen, setIsLogInOpen] = useState(false);
-  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   return (
     <Div>
-      <StAside>
-        <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
-        {isLogInOpen && <Modal name="logIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
-        <TextButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</TextButton>
-        {isSignUpOpen && <Modal name="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
-      </StAside>
-
       <p>여러분의 맛집을 추천해주세요!</p>
       <Container>
         <TitleInput />
@@ -65,21 +53,4 @@ const ButtonsContainer = styled.div`
 
 const View = styled.div`
   height: 150px;
-`;
-
-const StAside = styled.aside`
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  height: 40px;
-
-  padding: 10px;
-  padding-right: 30px;
-  gap: 10px;
-
-  background-color: var(--color_white1);
-
-  color: var(--color_gray1);
-  font-weight: 700;
 `;
