@@ -2,13 +2,13 @@ import React from 'react';
 import { styled } from 'styled-components';
 import MyPagePost from '../components/MyPagePost';
 import { TextButton } from '../shared/Buttons';
-
+import HomeButton from '../components/HomeButton';
 function MyPage() {
   return (
     <>
       <StAside>
         <TextButton>로그아웃</TextButton>
-        <TextButton>HOME</TextButton>
+        <HomeButton />
       </StAside>
       <MyPagePost />
     </>

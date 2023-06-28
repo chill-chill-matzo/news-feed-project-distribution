@@ -4,6 +4,7 @@ import { BlueButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
 import Modal from '../components/Modal';
 import { TextButton } from '../shared/Buttons';
+import BackButton from '../components/BackButton';
 
 function AddPost() {
   const [isLogInOpen, setIsLogInOpen] = useState(false);
@@ -25,7 +26,7 @@ function AddPost() {
         <ButtonsContainer>
           <BlueButton>사진 선택</BlueButton>
           <div>
-            <BlueButton>취소</BlueButton>
+            <BackButton />
             <BlueButton>등록</BlueButton>
           </div>
         </ButtonsContainer>
