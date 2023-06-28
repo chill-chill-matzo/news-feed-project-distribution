@@ -1,18 +1,24 @@
 import { TitleInput, ContentInput } from '../shared/Input';
 import { BlueButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
-import { addDoc, collection, getDocs, query, doc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage, auth } from '../firebase';
 
 const AddPost = () => {
+  const users = useSelector((state) => state.users);
+  const [user] = users;
+
   const [postStorage, setPostStorage] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [like, setLike] = useState(0);
-  const [image, setImage] = useState('');
-  const [user, setUser] = useState('');
-  const [time, setTime] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [imageLink, setImageLink] = useState('');
+  const like = 0;
+  const time = new Date().toLocaleString();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +33,6 @@ const AddPost = () => {
           id: doc.id,
           ...doc.data()
         };
-        console.log(data);
         initialPostStorage.push(data);
       });
       setPostStorage(initialPostStorage);
@@ -47,14 +52,28 @@ const AddPost = () => {
     }
   };
 
+  const handleFileSelect = (event) => {
+    setImageFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    const imageRef = ref(storage, `${auth.currentUser.uid}/${imageFile.name}`);
+    await uploadBytes(imageRef, imageFile);
+
+    const downloadURL = await getDownloadURL(imageRef);
+    if (downloadURL !== null) {
+      setImageLink(downloadURL);
+    }
+    console.log('image', imageLink);
+  };
+
   const addNewPost = async (event) => {
     event.preventDefault();
 
-    // setTime
-    // setUser
+    await handleUpload();
 
     const collectionRef = collection(db, 'PostStorage');
-    const newPost = { title, content, like, image, time, user };
+    const newPost = { title, content, like, imageLink, time, user };
 
     await addDoc(collectionRef, newPost);
 
@@ -65,7 +84,6 @@ const AddPost = () => {
     setContent('');
   };
 
-
   return (
     <Div>
       <p>여러분의 맛집을 추천해주세요!</p>
@@ -74,7 +92,7 @@ const AddPost = () => {
         <ContentInput name="content" value={content} onChange={onChange} />
         <View></View>
         <ButtonsContainer>
-          <BlueButton>사진 선택</BlueButton>
+          <input type="file" onChange={handleFileSelect} />
           <div>
             <BlueButton>취소</BlueButton>
             <BlueButton onClick={addNewPost}>등록</BlueButton>
