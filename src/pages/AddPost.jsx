@@ -19,7 +19,6 @@ const AddPost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [imageFile, setImageFile] = useState(null);
-  const [imageLink, setImageLink] = useState('');
   const like = 0;
   const time = new Date().toLocaleString();
 
@@ -65,15 +64,15 @@ const AddPost = () => {
 
     const downloadURL = await getDownloadURL(imageRef);
     if (downloadURL !== null) {
-      setImageLink(downloadURL);
+      return downloadURL;
     }
-    console.log('image', imageLink);
   };
 
   const addNewPost = async (event) => {
     event.preventDefault();
 
-    await handleUpload();
+    const imageLink = await handleUpload();
+    console.log('imageLink', imageLink);
 
     const collectionRef = collection(db, 'PostStorage');
     const newPost = { title, content, like, imageLink, time, user };
@@ -85,6 +84,7 @@ const AddPost = () => {
     });
     setTitle('');
     setContent('');
+    navigate('/');
   };
 
   const navigate = useNavigate();

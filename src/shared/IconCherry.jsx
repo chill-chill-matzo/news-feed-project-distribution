@@ -75,4 +75,5 @@ const IconDiv = styled.div`
   align-items: center;
   justify-content: center;
   margin: 5px;
+  cursor: pointer;
 `;
