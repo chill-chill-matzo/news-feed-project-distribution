@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import { TitleInput, ContentInput } from '../shared/Input';
 import { BlueButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
@@ -66,6 +65,7 @@ const AddPost = () => {
     setContent('');
   };
 
+
   return (
     <Div>
       <p>여러분의 맛집을 추천해주세요!</p>
@@ -116,21 +116,4 @@ const ButtonsContainer = styled.div`
 
 const View = styled.div`
   height: 150px;
-`;
-
-const StAside = styled.aside`
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  height: 40px;
-
-  padding: 10px;
-  padding-right: 30px;
-  gap: 10px;
-
-  background-color: var(--color_white1);
-
-  color: var(--color_gray1);
-  font-weight: 700;
 `;

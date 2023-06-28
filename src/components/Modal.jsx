@@ -10,7 +10,6 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut,
   updateProfile
 } from 'firebase/auth';
 import { getUsers } from '../redux/modules/users';
@@ -73,18 +72,12 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
         })
       );
 
-      console.log('로그인한 user', userCredential.user);
       setIsOpen(false);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log('로그인 에러', errorCode, errorMessage);
     }
-  };
-
-  const SignOut = async (event) => {
-    event.preventDefault();
-    await signOut(auth);
   };
 
   const closeHandler = () => {
@@ -105,7 +98,6 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
               ) : (
                 <BlueButton onClick={SignUp}>회원가입</BlueButton>
               )}
-              <BlueButton onClick={SignOut}>로그아웃</BlueButton>
               <GrayButton onClick={closeHandler}>닫기</GrayButton>
             </StButtonSet>
           </Inner>

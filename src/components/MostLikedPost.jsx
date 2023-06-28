@@ -14,4 +14,5 @@ const MostLikedImage = styled.div`
   width: 100%;
   height: 350px;
   position: relative;
+  margin-bottom: 15px;
 `;

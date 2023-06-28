@@ -2,24 +2,26 @@ import React from 'react';
 import '../reset.css';
 import { IconCherry } from './IconCherry';
 import { styled } from 'styled-components';
+import Header from './Header';
 
 function Layout({ children }) {
   return (
-    <StLayout>
+    <StyledLayout>
       <IconCherry />
 
-      <StContainer>
-        <StBody>{children}</StBody>
-      </StContainer>
+      <Container>
+        <Header />
+        <Body>{children}</Body>
+      </Container>
 
-      <StFooter>copyright @77matzo</StFooter>
-    </StLayout>
+      <Footer>copyright @77matzo</Footer>
+    </StyledLayout>
   );
 }
 
 export default Layout;
 
-const StLayout = styled.div`
+const StyledLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,19 +34,19 @@ const StLayout = styled.div`
   background-color: var(--color_yellow);
 `;
 
-const StContainer = styled.div`
+const Container = styled.div`
   width: 90%;
   height: 90%;
   background-color: var(--color_white1);
 `;
 
-const StBody = styled.div`
+const Body = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-const StFooter = styled.footer`
+const Footer = styled.footer`
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 12px;
