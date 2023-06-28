@@ -16,7 +16,7 @@ function Main() {
         }}
       >
         새 글 작성
-      </StButton>
+      </BlueButton>
       <NewestPost />
     </>
   );
