@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { addDoc, collection, getDocs, query, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
+import BackButton from '../components/BackButton';
 
 const AddPost = () => {
   const [postStorage, setPostStorage] = useState([]);
