@@ -15,7 +15,6 @@ function NewestPost() {
       const initialPostStorage = [];
 
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         const data = {
           id: doc.id,
           ...doc.data()
@@ -33,13 +32,6 @@ function NewestPost() {
         {postStorage.map((post) => {
           return <Post key={post.id} title={post.title} image={post.imageLink} />;
         })}
-        {/* <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" /> */}
       </Grid>
     </>
   );
@@ -60,11 +52,4 @@ const Grid = styled.div`
   @media screen and (max-width: 1100px) {
     grid-template-columns: repeat(3, minmax(200px, auto));
   }
-`;
-
-const Img = styled.img`
-  justify-content: center;
-  align-items: center;
-  width: 230px;
-  height: 230px;
 `;
