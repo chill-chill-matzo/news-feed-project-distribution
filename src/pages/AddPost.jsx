@@ -1,5 +1,5 @@
 import { TitleInput, ContentInput } from '../shared/Input';
-import { BlueButton } from '../shared/Buttons';
+import { BlueButton, GrayButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
 import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -10,7 +10,6 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage, auth } from '../firebase';
 
 import { useNavigate } from 'react-router-dom';
-
 
 const AddPost = () => {
   const users = useSelector((state) => state.users);
@@ -98,15 +97,16 @@ const AddPost = () => {
         <ContentInput name="content" value={content} onChange={onChange} />
         <View></View>
         <ButtonsContainer>
-          <input type="file" onChange={handleFileSelect} />
+          <BlueLabel for="file">파일 업로드</BlueLabel>
+          <Input type="file" onChange={handleFileSelect} id="file" />
           <div>
-            <BlueButton
+            <GrayButton
               onClick={() => {
                 navigate('/');
               }}
             >
               취소
-            </BlueButton>
+            </GrayButton>
             <BlueButton onClick={addNewPost}>등록</BlueButton>
           </div>
         </ButtonsContainer>
@@ -120,6 +120,7 @@ export default AddPost;
 const Div = styled.div`
   justify-content: center;
   align-items: center;
+  min-height: 800px;
   margin-bottom: 40px;
   text-align: center;
   font-weight: 700;
@@ -146,4 +147,26 @@ const ButtonsContainer = styled.div`
 
 const View = styled.div`
   height: 150px;
+`;
+
+const BlueLabel = styled.label`
+  align-items: center;
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: var(--color_blue2);
+  color: var(--color_white1);
+  border: none;
+  border-radius: 12px;
+  font-size: small;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color_blue1);
+  }
+`;
+
+const Input = styled.input`
+  display: none;
 `;
