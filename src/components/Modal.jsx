@@ -7,8 +7,10 @@ import { BlueButton, GrayButton } from '../shared/Buttons';
 import { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 import {
+  browserSessionPersistence,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  setPersistence,
   signInWithEmailAndPassword,
   updateProfile
 } from 'firebase/auth';
@@ -62,6 +64,7 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
     event.preventDefault();
 
     try {
+      setPersistence(auth, browserSessionPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       dispatch(
@@ -88,7 +91,7 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
     ? createPortal(
         <Outer>
           <Inner>
-            {type === 'signIn' ? '로그인이 필요해요 :)' : '회원가입을 해볼까요?'}
+            <p>{type === 'signIn' ? '로그인이 필요해요 :)' : '회원가입을 해볼까요?'}</p>
             {type === 'signUp' ? <Input name="name" value={name} onChange={onChange} placeholder="이름" /> : null}
             <Input type="email" name="email" value={email} onChange={onChange} placeholder="이메일" />
             <Input type="password" name="password" value={password} onChange={onChange} placeholder="비밀번호" />
@@ -108,7 +111,6 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
 };
 
 export default Modal;
-
 const Outer = styled.div`
   position: fixed;
   top: 0;
@@ -134,6 +136,10 @@ const Inner = styled.div`
   background-color: var(--color_white1);
 
   border-radius: 10px;
+
+  p {
+    font-size: larger;
+  }
 `;
 
 const StButtonSet = styled.div`
