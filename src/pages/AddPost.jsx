@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import { TitleInput, ContentInput } from '../shared/Input';
 import { BlueButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
-import Modal from '../components/Modal';
+
 import { TextButton } from '../shared/Buttons';
+import { useNavigate } from 'react-router-dom';
 
 function AddPost() {
-  const [isLogInOpen, setIsLogInOpen] = useState(false);
-  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <Div>
       <StAside>
-        <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
-        {isLogInOpen && <Modal name="logIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
-        <TextButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</TextButton>
-        {isSignUpOpen && <Modal name="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
+        <TextButton
+          onClick={() => {
+            navigate('mypage');
+          }}
+        >
+          마이페이지
+        </TextButton>
+
+        <TextButton>로그아웃</TextButton>
       </StAside>
 
       <p>여러분의 맛집을 추천해주세요!</p>
