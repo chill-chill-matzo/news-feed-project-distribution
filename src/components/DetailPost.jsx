@@ -1,7 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { BlueButton } from '../shared/Buttons';
-import BackButton from '../components/BackButton';
 
 function DetailPost() {
   return (
@@ -16,7 +15,6 @@ function DetailPost() {
         </p>
         <ButtonSet>
           <BlueButton>수정</BlueButton>
-            <BackButton />
           <BlueButton>삭제</BlueButton>
         </ButtonSet>
       </DetailContainer>
@@ -38,6 +36,7 @@ const DetailImage = styled.div`
 
 const DetailContainer = styled.div`
   width: 87%;
+  min-height: 200px;
   margin: 20px auto 20px;
 
   h1 {

@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { addDoc, collection, getDocs, query, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
-import BackButton from '../components/BackButton';
+import { useNavigate } from 'react-router-dom';
 
 const AddPost = () => {
   const [postStorage, setPostStorage] = useState([]);
@@ -66,6 +66,8 @@ const AddPost = () => {
     setContent('');
   };
 
+  const navigate = useNavigate();
+
   return (
     <Div>
       <p>여러분의 맛집을 추천해주세요!</p>
@@ -76,8 +78,13 @@ const AddPost = () => {
         <ButtonsContainer>
           <BlueButton>사진 선택</BlueButton>
           <div>
-            <BackButton />
-            <BlueButton>취소</BlueButton>
+            <BlueButton
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              취소
+            </BlueButton>
             <BlueButton onClick={addNewPost}>등록</BlueButton>
           </div>
         </ButtonsContainer>

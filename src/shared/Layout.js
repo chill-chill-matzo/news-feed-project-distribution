@@ -3,11 +3,17 @@ import '../reset.css';
 import { IconCherry } from './IconCherry';
 import { styled } from 'styled-components';
 import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 
 function Layout({ children }) {
+  const navigate = useNavigate();
   return (
     <StyledLayout>
-      <IconCherry />
+      <IconCherry
+        onClick={() => {
+          navigate('/');
+        }}
+      />
 
       <Container>
         <Header />

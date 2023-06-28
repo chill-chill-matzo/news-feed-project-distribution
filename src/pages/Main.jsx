@@ -17,6 +17,13 @@ function Main() {
       >
         새 글 작성
       </Button>
+      <Button
+        onClick={() => {
+          navigate('detail');
+        }}
+      >
+        상세
+      </Button>
       <NewestPost />
     </>
   );
