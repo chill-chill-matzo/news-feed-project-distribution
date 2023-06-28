@@ -26,7 +26,7 @@ const Grid = styled.div`
   grid-gap: 15px;
   justify-content: center;
   place-items: center;
-  margin-top: 50px;
+  margin-top: 15px;
   margin-bottom: 50px;
 
   @media screen and (max-width: 1100px) {
