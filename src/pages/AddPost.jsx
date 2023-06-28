@@ -3,7 +3,7 @@ import { TitleInput, ContentInput } from '../shared/Input';
 import { BlueButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
 import Modal from '../components/Modal';
-// import ModalSignUp from '../components/ModalSignUp';
+import { TextButton } from '../shared/Buttons';
 
 function AddPost() {
   const [isLogInOpen, setIsLogInOpen] = useState(false);
@@ -11,13 +11,13 @@ function AddPost() {
   return (
     <Div>
       <StAside>
-        <StButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</StButton>
+        <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
         {isLogInOpen && <Modal name="logIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
-        <StButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</StButton>
+        <TextButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</TextButton>
         {isSignUpOpen && <Modal name="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
       </StAside>
 
-      <Title>여러분의 맛집을 추천해주세요!</Title>
+      <p>여러분의 맛집을 추천해주세요!</p>
       <Container>
         <TitleInput />
         <ContentInput />
@@ -42,11 +42,11 @@ const Div = styled.div`
   margin-bottom: 40px;
   text-align: center;
   font-weight: 700;
-`;
 
-const Title = styled.p`
-  margin: 10px;
-  font-size: x-large;
+  p {
+    margin: 10px;
+    font-size: x-large;
+  }
 `;
 
 const Container = styled.form`
@@ -82,13 +82,4 @@ const StAside = styled.aside`
 
   color: var(--color_gray1);
   font-weight: 700;
-`;
-
-const StButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color_gray1);
-  cursor: pointer;
 `;

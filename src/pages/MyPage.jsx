@@ -1,13 +1,14 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import MyPagePost from '../components/MyPagePost';
+import { TextButton } from '../shared/Buttons';
 
 function MyPage() {
   return (
     <>
       <StAside>
-        <StButton>로그아웃</StButton>
-        <StButton>HOME</StButton>
+        <TextButton>로그아웃</TextButton>
+        <TextButton>HOME</TextButton>
       </StAside>
       <MyPagePost />
     </>
@@ -31,13 +32,4 @@ const StAside = styled.aside`
 
   color: var(--color_gray1);
   font-weight: 700;
-`;
-
-const StButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--color_gray1);
-  cursor: pointer;
 `;
