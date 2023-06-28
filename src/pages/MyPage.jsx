@@ -1,7 +1,78 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import MyPagePost from '../components/MyPagePost';
+import { styled } from 'styled-components';
+import { GrayButton } from '../shared/Buttons';
 
-function MyPage() {
-  return <div>MyPage</div>;
-}
+const MyPage = () => {
+  const users = useSelector((state) => state.users);
+  const [user] = users;
+
+  return (
+    <>
+      <div>
+        <Info>
+          <Image></Image>
+          {user && (
+            <div>
+              <Name>{user.name}님, 안녕하세요!</Name>
+              <Email>{user.email}</Email>
+            </div>
+          )}
+        </Info>
+
+        <Options>
+          <Button>좋아요</Button>
+          <Button>내 글 목록</Button>
+          <Button>비밀번호 변경</Button>
+        </Options>
+      </div>
+      <MyPagePost />
+    </>
+  );
+};
 
 export default MyPage;
+
+const Info = styled.div`
+  display: flex;
+  gap: 40px;
+
+  padding: 20px 70px;
+`;
+
+const Image = styled.div`
+  width: 90px;
+  height: 90px;
+  background-color: var(--color_blue2);
+  border-radius: 100px;
+`;
+
+const Name = styled.p`
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 700px;
+`;
+
+const Email = styled.p`
+  font-size: 18px;
+  font-weight: 700px;
+  color: var(--color_gray1);
+`;
+
+const Options = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin: 0px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+
+  gap: 50px;
+`;
+
+const Button = styled(GrayButton)`
+  width: 150px;
+  height: 35px;
+  padding: 10px 15px;
+`;

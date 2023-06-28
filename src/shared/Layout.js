@@ -1,58 +1,59 @@
 import React from 'react';
-
-const HeaderStyles = {
-  width: '100%',
-  background: 'black',
-  height: '50px',
-  display: 'flex',
-  alignItems: 'center',
-  paddingLeft: '20px',
-  color: 'white',
-  fontWeight: '600'
-};
-const FooterStyles = {
-  width: '100%',
-  height: '50px',
-  display: 'flex',
-  background: 'black',
-  color: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '12px'
-};
-
-const layoutStyles = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  minHeight: '86vh'
-};
-
-function Header() {
-  return (
-    <div style={{ ...HeaderStyles }}>
-      <span>맛집 추천은 77 matzo</span>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div style={{ ...FooterStyles }}>
-      <span>copyright @77matzo</span>
-    </div>
-  );
-}
+import '../reset.css';
+import { IconCherry } from './IconCherry';
+import { styled } from 'styled-components';
+import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 
 function Layout({ children }) {
+  const navigate = useNavigate();
   return (
-    <div>
-      <Header />
-      <div style={{ ...layoutStyles }}>{children}</div>
-      <Footer />
-    </div>
+    <StyledLayout>
+      <IconCherry
+        onClick={() => {
+          navigate('/');
+        }}
+      />
+
+      <Container>
+        <Header />
+        <Body>{children}</Body>
+      </Container>
+
+      <Footer>copyright @77matzo</Footer>
+    </StyledLayout>
   );
 }
 
 export default Layout;
+
+const StyledLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 1200px;
+  min-width: 800px;
+
+  margin: 0 auto;
+
+  background-color: var(--color_yellow);
+`;
+
+const Container = styled.div`
+  width: 90%;
+  height: 90%;
+  background-color: var(--color_white1);
+`;
+
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Footer = styled.footer`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 12px;
+`;
