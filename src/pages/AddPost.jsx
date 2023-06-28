@@ -97,7 +97,7 @@ const AddPost = () => {
         <ContentInput name="content" value={content} onChange={onChange} />
         <View></View>
         <ButtonsContainer>
-          <BlueLabel for="file">파일 업로드</BlueLabel>
+          <BlueLabel htmlFor="file">파일 업로드</BlueLabel>
           <Input type="file" onChange={handleFileSelect} id="file" />
           <div>
             <GrayButton

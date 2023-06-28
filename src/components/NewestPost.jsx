@@ -1,17 +1,45 @@
-import React from 'react';
+import { collection, getDocs, query } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { db } from '../firebase';
 import { styled } from 'styled-components';
+import Post from './Post';
 
 function NewestPost() {
+  const [postStorage, setPostStorage] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, 'PostStorage'));
+      const querySnapshot = await getDocs(q);
+
+      const initialPostStorage = [];
+
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+        const data = {
+          id: doc.id,
+          ...doc.data()
+        };
+        initialPostStorage.push(data);
+      });
+      setPostStorage(initialPostStorage);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <Grid>
+        {postStorage.map((post) => {
+          return <Post key={post.id} title={post.title} image={post.imageLink} />;
+        })}
+        {/* <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
         <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
         <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
         <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
         <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
         <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
-        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" />
+        <Img src="https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg" alt="" /> */}
       </Grid>
     </>
   );
