@@ -3,7 +3,6 @@ import MostLikedPost from '../components/MostLikedPost';
 import NewestPost from '../components/NewestPost';
 import { styled } from 'styled-components';
 import Modal from '../components/Modal';
-import { BlueButton } from '../shared/Buttons';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TextButton } from '../shared/Buttons';
@@ -19,27 +18,27 @@ function Main() {
   return (
     <>
       <StAside>
+        <TextButton
+          onClick={() => {
+            navigate('mypage');
+          }}
+        >
+          마이페이지(test)
+        </TextButton>
         <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
         {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
         <TextButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</TextButton>
         {isSignUpOpen && <Modal type="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
       </StAside>
       <MostLikedPost />
-      <NewestPost />
-      <BlueButton
-        onClick={() => {
-          navigate('mypage');
-        }}
-      >
-        마이페이지
-      </BlueButton>
-      <BlueButton
+      <StButton
         onClick={() => {
           navigate('addpost');
         }}
       >
         새 글 작성
-      </BlueButton>
+      </StButton>
+      <NewestPost />
     </>
   );
 }
@@ -58,4 +57,24 @@ const StAside = styled.aside`
   gap: 10px;
 
   background-color: var(--color_white1);
+`;
+
+const StButton = styled.button`
+  margin: 30px 300px;
+  padding: 10px 15px;
+
+  background-color: var(--color_gray2);
+
+  border: none;
+  border-radius: 10px;
+
+  color: var(--color_white1);
+  font-weight: 700;
+  text-align: center;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color_gray1);
+  }
 `;
