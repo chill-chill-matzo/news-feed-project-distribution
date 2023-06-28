@@ -65,7 +65,6 @@ const AddPost = () => {
     setContent('');
   };
 
-
   return (
     <Div>
       <p>여러분의 맛집을 추천해주세요!</p>
@@ -76,6 +75,7 @@ const AddPost = () => {
         <ButtonsContainer>
           <BlueButton>사진 선택</BlueButton>
           <div>
+            <BackButton />
             <BlueButton>취소</BlueButton>
             <BlueButton onClick={addNewPost}>등록</BlueButton>
           </div>
