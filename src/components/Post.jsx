@@ -28,4 +28,5 @@ const Img = styled.img`
   align-items: center;
   width: 230px;
   height: 230px;
+  object-fit: cover;
 `;
