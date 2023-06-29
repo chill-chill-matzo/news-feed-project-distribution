@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { BlueButton } from '../shared/Buttons';
-import { useSelector } from 'react-redux';
-import { collection, getDocs, query } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
+import { collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { modifyPost } from '../redux/modules/post';
 
 function DetailPost() {
   const users = useSelector((state) => state.users);
@@ -13,6 +14,9 @@ function DetailPost() {
   const params = useParams();
 
   const [postStorage, setPostStorage] = useState([]);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +41,27 @@ function DetailPost() {
     return postItem.id === params.id;
   });
 
+  const deletePost = async (event) => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      const postRef = doc(db, 'PostStorage', selectedPost.id);
+      await deleteDoc(postRef);
+      alert('삭제되었습니다.');
+      navigate('/');
+    }
+    return;
+  };
+
+  const updateButtonClickHandler = () => {
+    dispatch(
+      modifyPost({
+        title: selectedPost.title,
+        content: selectedPost.content
+      })
+    );
+
+    navigate(`/updatepost/${selectedPost.id}`);
+  };
+
   return (
     <>
       {selectedPost && (
@@ -49,8 +74,8 @@ function DetailPost() {
             <br />
             {user.id === selectedPost.user.id && (
               <ButtonSet>
-                <BlueButton>수정</BlueButton>
-                <BlueButton>삭제</BlueButton>
+                <BlueButton onClick={updateButtonClickHandler}>수정</BlueButton>
+                <BlueButton onClick={deletePost}>삭제</BlueButton>
               </ButtonSet>
             )}
           </DetailContainer>

@@ -4,6 +4,7 @@ import Detail from '../pages/Detail';
 import MyPage from '../pages/MyPage';
 import Layout from './Layout';
 import AddPost from '../pages/AddPost';
+import UpdatePost from '../components/UpdatePost';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
           <Route path="detail/:id" element={<Detail />} />
           <Route path="mypage" element={<MyPage />} />
           <Route path="addpost" element={<AddPost />} />
+          <Route path="updatepost/:id" element={<UpdatePost />} />
         </Routes>
       </Layout>
     </BrowserRouter>
