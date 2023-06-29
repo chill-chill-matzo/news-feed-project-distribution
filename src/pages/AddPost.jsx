@@ -102,7 +102,9 @@ const AddPost = () => {
       <Container>
         <TitleInput name="title" value={title} onChange={onChange} />
         <ContentInput name="content" value={content} onChange={onChange} />
-        <View src={imagePreview ? imagePreview : null} />
+        <div>
+          <View src={imagePreview ? imagePreview : null} alt="" />
+        </div>
         <ButtonsContainer>
           <BlueLabel htmlFor="file">파일 업로드</BlueLabel>
           <Input type="file" onChange={handleFileSelect} id="file" accept="image/*" />
@@ -153,7 +155,7 @@ const ButtonsContainer = styled.div`
 `;
 
 const View = styled.img`
-  height: 150px;
+  height: 300px;
 `;
 
 const BlueLabel = styled.label`
