@@ -39,7 +39,7 @@ function NewestPost() {
               title={post.title}
               image={post.imageLink}
               onClick={() => {
-                navigate('detail');
+                navigate(`detail/${post.id}`);
               }}
             />
           );

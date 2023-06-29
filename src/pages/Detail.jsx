@@ -4,7 +4,7 @@ import { TextButton } from '../shared/Buttons';
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-function Detail() {
+function Detail({ props }) {
   const navigate = useNavigate();
 
   return (
