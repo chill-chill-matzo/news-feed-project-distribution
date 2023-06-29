@@ -108,8 +108,8 @@ const AddPost = () => {
     <Div>
       <p>여러분의 맛집을 추천해주세요!</p>
       <Container>
-        <TitleInput name="title" value={title} onChange={onChange} />
-        <ContentInput name="content" value={content} onChange={onChange} />
+        <TitleInput name="title" value={title} onChange={onChange} placeholder="제목을 입력하세요" required />
+        <ContentInput name="content" value={content} onChange={onChange} placeholder="내용을 입력하세요" required />
         <div>
           <View src={imagePreview ? imagePreview : null} alt="" />
         </div>
