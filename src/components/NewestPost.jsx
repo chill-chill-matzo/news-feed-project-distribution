@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { styled } from 'styled-components';
 import Post from './Post';
+import { useNavigate } from 'react-router-dom';
 
 function NewestPost() {
   const [postStorage, setPostStorage] = useState([]);
@@ -26,11 +27,22 @@ function NewestPost() {
     fetchData();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <Grid>
         {postStorage.map((post) => {
-          return <Post key={post.id} title={post.title} image={post.imageLink} />;
+          return (
+            <Post
+              key={post.id}
+              title={post.title}
+              image={post.imageLink}
+              onClick={() => {
+                navigate('detail');
+              }}
+            />
+          );
         })}
       </Grid>
     </>
