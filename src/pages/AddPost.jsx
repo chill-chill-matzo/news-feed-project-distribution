@@ -31,7 +31,6 @@ const AddPost = () => {
       const initialPostStorage = [];
 
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         const data = {
           id: doc.id,
           ...doc.data()
@@ -58,12 +57,20 @@ const AddPost = () => {
   const handleFileSelect = (event) => {
     setImageFile(event.target.files[0]);
 
-    const imagePreview = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(imagePreview);
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-    };
+    if (imageFile === 0) {
+      return;
+    } else {
+      const {
+        currentTarget: { files }
+      } = event;
+
+      const imagePreview = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(imagePreview);
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+    }
   };
 
   const handleUpload = async () => {
@@ -155,7 +162,7 @@ const ButtonsContainer = styled.div`
 `;
 
 const View = styled.img`
-  height: 300px;
+  height: 150px;
 `;
 
 const BlueLabel = styled.label`
