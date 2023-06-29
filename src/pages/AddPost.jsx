@@ -20,8 +20,8 @@ const AddPost = () => {
   const [content, setContent] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const like = 0;
-  const time = new Date().toLocaleString();
   const [imagePreview, setImagePreview] = useState(null);
+  const time = new Date().toString();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +37,7 @@ const AddPost = () => {
         };
         initialPostStorage.push(data);
       });
+
       setPostStorage(initialPostStorage);
     };
     fetchData();
