@@ -58,6 +58,7 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
       const errorMessage = error.message;
       console.log('회원가입 에러', errorCode, errorMessage);
     }
+    setIsOpen(false);
   };
 
   const SignIn = async (event) => {
