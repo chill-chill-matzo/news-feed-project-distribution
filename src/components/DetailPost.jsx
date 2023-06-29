@@ -106,6 +106,7 @@ const DetailContainer = styled.div`
   p {
     margin-top: 15px;
     font-size: 17px;
+    white-space: pre;
   }
 `;
 

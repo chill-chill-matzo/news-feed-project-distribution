@@ -25,10 +25,9 @@ const Blue = styled.button`
   text-align: center;
   cursor: pointer;
 
-
   &:hover {
     background-color: var(--color_blue1);
-    transition: all .3s ;
+    transition: all 0.3s;
   }
 `;
 
@@ -46,7 +45,7 @@ const Gray = styled.button`
 
   &:hover {
     background-color: var(--color_gray1);
-    transition: all .3s ;
+    transition: all 0.3s;
   }
 `;
 
