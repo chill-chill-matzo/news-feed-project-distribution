@@ -31,7 +31,6 @@ const AddPost = () => {
       const initialPostStorage = [];
 
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
         const data = {
           id: doc.id,
           ...doc.data()

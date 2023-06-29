@@ -1,37 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { BlueButton } from '../shared/Buttons';
+import { useSelector } from 'react-redux';
+import { collection, getDocs, query } from 'firebase/firestore';
+import { db } from '../firebase';
+import { useParams } from 'react-router-dom';
 
 function DetailPost() {
+  const users = useSelector((state) => state.users);
+  const [user] = users;
+
+  const params = useParams();
+
+  const [postStorage, setPostStorage] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, 'PostStorage'));
+      const querySnapshot = await getDocs(q);
+
+      const initialPostStorage = [];
+
+      querySnapshot.forEach((doc) => {
+        const data = {
+          id: doc.id,
+          ...doc.data()
+        };
+        initialPostStorage.push(data);
+      });
+      setPostStorage(initialPostStorage);
+    };
+    fetchData();
+  }, []);
+
+  const selectedPost = postStorage.find((postItem) => {
+    return postItem.id === params.id;
+  });
+
   return (
     <>
-      <DetailImage />
-      <DetailContainer>
-        <h1>제목</h1>
-        <p>
-          상세 내용.....상세 내용.....상세 내용.....상세 내용.....상세 내용..... 상세 내용..... 상세 내용.....상세
-          내용.....상세 내용.....상세 내용.....상세 내용..... 상세 내용.....나는 뭉충이이 저만 알고 싶은 맛집입니다..
-          알려드려요.. 고맙죠?
-        </p>
-        <ButtonSet>
-          <BlueButton>수정</BlueButton>
-          <BlueButton>삭제</BlueButton>
-        </ButtonSet>
-      </DetailContainer>
+      {selectedPost && (
+        <>
+          <DetailImage src={selectedPost.imageLink} alt="" />
+          <DetailContainer>
+            <h1>{selectedPost.title}</h1>
+            <p>{selectedPost.content}</p>
+            <RightDiv>작성자: {selectedPost.user.name}</RightDiv>
+            <br />
+            {user.id === selectedPost.user.id && (
+              <ButtonSet>
+                <BlueButton>수정</BlueButton>
+                <BlueButton>삭제</BlueButton>
+              </ButtonSet>
+            )}
+          </DetailContainer>
+        </>
+      )}
     </>
   );
 }
 
 export default DetailPost;
 
-const DetailImage = styled.div`
+const DetailImage = styled.img`
   position: relative;
   width: 90%;
-  height: 500px;
   margin: 30px auto;
-  background-image: url('https://i.pinimg.com/564x/68/4c/ed/684ced199400f4316b10a9083a37a0f0.jpg');
-  background-size: 100%;
-  background-position: center;
 `;
 
 const DetailContainer = styled.div`
@@ -53,4 +87,10 @@ const DetailContainer = styled.div`
 const ButtonSet = styled.div`
   display: flex;
   justify-content: right;
+`;
+
+const RightDiv = styled.div`
+  display: flex;
+  justify-content: right;
+  margin: 5px;
 `;
