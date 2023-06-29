@@ -29,14 +29,6 @@ function Main() {
       <Button onClick={handleAddPostClick}>새 글 작성</Button>
       {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
 
-      <Button
-        onClick={() => {
-          navigate('detail');
-        }}
-      >
-        상세
-      </Button>
-
       <NewestPost />
     </>
   );

@@ -21,6 +21,7 @@ const AddPost = () => {
   const [imageFile, setImageFile] = useState(null);
   const like = 0;
   const time = new Date().toLocaleString();
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +57,13 @@ const AddPost = () => {
 
   const handleFileSelect = (event) => {
     setImageFile(event.target.files[0]);
+
+    const imagePreview = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(imagePreview);
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
   };
 
   const handleUpload = async () => {
@@ -72,7 +80,6 @@ const AddPost = () => {
     event.preventDefault();
 
     const imageLink = await handleUpload();
-    console.log('imageLink', imageLink);
 
     const collectionRef = collection(db, 'PostStorage');
     const newPost = { title, content, like, imageLink, time, user };
@@ -95,10 +102,10 @@ const AddPost = () => {
       <Container>
         <TitleInput name="title" value={title} onChange={onChange} />
         <ContentInput name="content" value={content} onChange={onChange} />
-        <View></View>
+        <View src={imagePreview ? imagePreview : null} />
         <ButtonsContainer>
           <BlueLabel htmlFor="file">파일 업로드</BlueLabel>
-          <Input type="file" onChange={handleFileSelect} id="file" />
+          <Input type="file" onChange={handleFileSelect} id="file" accept="image/*" />
           <div>
             <GrayButton
               onClick={() => {
@@ -145,7 +152,7 @@ const ButtonsContainer = styled.div`
   margin-top: 30px;
 `;
 
-const View = styled.div`
+const View = styled.img`
   height: 150px;
 `;
 

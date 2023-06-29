@@ -1,18 +1,18 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-function Post({ title, image }) {
+function Post({ ...props }) {
   return (
-    <StDiv>
-      <Img src={image} alt={title}></Img>
-      <p>&nbsp;{title}&nbsp;</p>
-    </StDiv>
+    <Div {...props}>
+      <Img src={props.image} alt={props.title}></Img>
+      <p>&nbsp;{props.title}&nbsp;</p>
+    </Div>
   );
 }
 
 export default Post;
 
-const StDiv = styled.div`
+const Div = styled.div`
   display: flex;
   flex-direction: column;
 
