@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { styled } from 'styled-components';
@@ -10,7 +10,7 @@ function NewestPost() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, 'PostStorage'));
+      const q = query(collection(db, 'PostStorage'), orderBy('time', 'desc'));
       const querySnapshot = await getDocs(q);
 
       const initialPostStorage = [];
@@ -54,7 +54,7 @@ export default NewestPost;
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(200px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(20%, auto));
+  grid-template-rows: repeat(auto-fill);
   grid-gap: 15px;
   justify-content: center;
   place-items: center;
