@@ -6,6 +6,7 @@ import { collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 import { modifyPost } from '../redux/modules/post';
+import PressLike from './PressLike';
 
 function DetailPost() {
   const users = useSelector((state) => state.users);
@@ -70,8 +71,10 @@ function DetailPost() {
           <DetailContainer>
             <h1>{selectedPost.title}</h1>
             <p>{selectedPost.content}</p>
-            <RightDiv>작성자: {selectedPost.user.name}</RightDiv>
-            <br />
+            <BottomDiv>
+              <PressLike postStorage={postStorage} params={params} />
+              <RightDiv>작성자: {selectedPost.user.name}</RightDiv>
+            </BottomDiv>
             {user.id === selectedPost.user.id && (
               <ButtonSet>
                 <BlueButton onClick={updateButtonClickHandler}>수정</BlueButton>
@@ -108,6 +111,13 @@ const DetailContainer = styled.div`
     font-size: 17px;
     white-space: pre;
   }
+`;
+
+const BottomDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+  align-items: center;
 `;
 
 const ButtonSet = styled.div`
