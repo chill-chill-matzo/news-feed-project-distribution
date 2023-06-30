@@ -14,7 +14,6 @@ function PressLike({ postStorage, params }) {
       const post = postStorage.find((postItem) => postItem.id === params.id);
       setSelectedPost(post);
 
-      // 실시간으로 좋아요 수 업데이트를 위해 스냅샷 리스너 등록
       const postRef = doc(db, 'PostStorage', post.id);
       const unsubscribe = onSnapshot(postRef, (doc) => {
         setSelectedPost({
@@ -23,23 +22,21 @@ function PressLike({ postStorage, params }) {
         });
       });
       return () => {
-        unsubscribe(); // 컴포넌트 언마운트 시에 스냅샷 리스너 해제
+        unsubscribe();
       };
     }
   }, [postStorage, params.id]);
 
-  // 좋아요 수 업데이트 함수
   const updateLikeCount = async (postId, newCount) => {
     const postRef = doc(db, 'PostStorage', postId);
 
     try {
       await updateDoc(postRef, { like: newCount });
-      console.log('좋아요 수가 업데이트되었습니다.');
     } catch (error) {
       console.error('좋아요 수 업데이트에 실패했습니다:', error);
     }
   };
-  // 좋아요 버튼 토글 처리
+
   const toggleLike = () => {
     if (selectedPost) {
       if (liked) {

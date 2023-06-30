@@ -11,10 +11,10 @@ function Detail({ props }) {
     <>
       <BackButton
         onClick={() => {
-          navigate('/');
+          navigate(-1);
         }}
       >
-        〈 Main
+        〈 BACK
       </BackButton>
       <DetailPost />
     </>
