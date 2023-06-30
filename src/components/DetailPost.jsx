@@ -107,16 +107,18 @@ const DetailContainer = styled.div`
   }
 
   p {
+    width: 87%;
     margin-top: 15px;
     font-size: 17px;
-    white-space: pre;
+    white-space: pre-line;
+    word-wrap: break-word;
   }
 `;
 
 const BottomDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: 50px;
   align-items: center;
 `;
 
