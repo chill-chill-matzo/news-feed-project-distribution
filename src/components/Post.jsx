@@ -13,17 +13,24 @@ function Post({ ...props }) {
 export default Post;
 
 const Div = styled.div`
-  display: flex;
+  display: block;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
   border: 2px solid var(--color_gray2);
   border-radius: 12px;
-  &:hover {border-color: var(--color_gray1)}
+  &:hover {
+    border-color: var(--color_gray1);
+  }
+
   p {
+    width: 200px;
     margin: 5px auto 5px;
     text-align: center;
     font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -36,7 +43,6 @@ const Img = styled.img`
   &:hover {
     /* transform: scale(1.3); */
     opacity: 0.8;
-    transition: all .5s ease ;
+    transition: all 0.5s ease;
   }
-  
 `;
