@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { TextButton } from '../shared/Buttons';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { IconCherry, IconCherryFalse } from '../shared/IconCherry';
 
-function PressLike({ postStorage, params }) {
+function PressLike({ postStorage, user, params }) {
+  const [userLikeList, setUserLikeList] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [liked, setLiked] = useState(false);
 
@@ -37,16 +38,46 @@ function PressLike({ postStorage, params }) {
     }
   };
 
-  const toggleLike = () => {
+  const toggleLike = async (event) => {
+    event.preventDefault();
+
+    if (!userLikeList) {
+      return; // userLikeList가 초기화되지 않은 경우 종료
+    }
+
     if (selectedPost) {
       if (liked) {
         const updatedCount = Math.max(selectedPost.like - 1, 0);
         updateLikeCount(selectedPost.id, updatedCount);
         setLiked(false);
+
+        const likeIndex = userLikeList.findIndex((likeItem) => likeItem.postId === params.id);
+
+        if (likeIndex !== -1) {
+          const deletedLikeItem = userLikeList[likeIndex];
+          const likeRef = doc(db, 'UserLikeList', deletedLikeItem.id);
+          await deleteDoc(likeRef);
+
+          const updatedUserLikeList = [...userLikeList];
+          updatedUserLikeList.splice(likeIndex, 1);
+          setUserLikeList(updatedUserLikeList);
+        }
       } else {
         const updatedCount = selectedPost.like + 1;
         updateLikeCount(selectedPost.id, updatedCount);
         setLiked(true);
+
+        const userId = user.id;
+        const postId = selectedPost.id;
+
+        const collectionRef = collection(db, 'UserLikeList');
+        const newPost = { userId, postId };
+
+        const docRef = await addDoc(collectionRef, newPost);
+
+        setUserLikeList((prev) => {
+          return [...prev, { id: docRef.id, ...newPost }];
+        });
       }
     }
   };

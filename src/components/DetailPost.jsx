@@ -72,7 +72,7 @@ function DetailPost() {
             <h1>{selectedPost.title}</h1>
             <p>{selectedPost.content}</p>
             <BottomDiv>
-              <PressLike postStorage={postStorage} params={params} />
+              <PressLike postStorage={postStorage} params={params} user={user} />
               <RightDiv>작성자: {selectedPost.user.name}</RightDiv>
             </BottomDiv>
             {user.id === selectedPost.user.id && (
