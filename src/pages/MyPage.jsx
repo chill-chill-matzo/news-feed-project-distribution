@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import MyPagePost from '../components/MyPagePost';
 import MyPageLike from '../components/MypageLike';
@@ -6,22 +6,20 @@ import MyPagePW from '../components/MypagePW';
 import { styled } from 'styled-components';
 import { GrayButton } from '../shared/Buttons';
 
-
 const MyPage = () => {
   const users = useSelector((state) => state.users);
   const [user] = users;
-  
-  const [clickedBtn, setClickedBtn] = useState("my-post-btn")
-  
+
+  const [clickedBtn, setClickedBtn] = useState('my-post-btn');
+
   const isActive = (id) => {
-    return clickedBtn === id
-  }
+    return clickedBtn === id;
+  };
 
   const clickButton = (event) => {
-    setClickedBtn(event.target.id)
-  }
+    setClickedBtn(event.target.id);
+  };
 
-  
   return (
     <>
       <div>
@@ -36,14 +34,20 @@ const MyPage = () => {
         </Info>
 
         <Options>
-          <Button onClick={clickButton} active={isActive("like-btn")} id="like-btn">좋아요</Button>
-          <Button onClick={clickButton} active={isActive("my-post-btn")} id="my-post-btn">내 글 목록</Button>
-          <Button onClick={clickButton} active={isActive("change-pw-btn")} id="change-pw-btn">비밀번호 변경</Button>
+          <Button onClick={clickButton} active={isActive('like-btn')} id="like-btn">
+            좋아요
+          </Button>
+          <Button onClick={clickButton} active={isActive('my-post-btn')} id="my-post-btn">
+            내 글 목록
+          </Button>
+          <Button onClick={clickButton} active={isActive('change-pw-btn')} id="change-pw-btn">
+            비밀번호 변경
+          </Button>
         </Options>
       </div>
-      {isActive("like-btn") ? <MyPageLike />  : null}
-      {isActive("my-post-btn") ? <MyPagePost /> : null }
-      {isActive("change-pw-btn")? <MyPagePW />  : null}
+      {isActive('like-btn') ? <MyPageLike /> : null}
+      {isActive('my-post-btn') ? <MyPagePost /> : null}
+      {isActive('change-pw-btn') ? <MyPagePW /> : null}
     </>
   );
 };
@@ -91,6 +95,8 @@ const Button = styled(GrayButton)`
   width: 150px;
   height: 35px;
   padding: 10px 15px;
-  background-color: ${props => props.active ? 'var(--color_blue2)' : null};
-  &:hover {background-color: ${props => props.active ? 'var(--color_blue1)' : null};}
+  background-color: ${(props) => (props.active ? 'var(--color_blue2)' : null)};
+  &:hover {
+    background-color: ${(props) => (props.active ? 'var(--color_blue1)' : null)};
+  }
 `;

@@ -62,10 +62,6 @@ function UpdatePost() {
     if (imageFile === 0) {
       return;
     } else {
-      const {
-        currentTarget: { files }
-      } = event;
-
       const imagePreview = event.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(imagePreview);
