@@ -99,11 +99,22 @@ function UpdatePost() {
       });
     } else {
       const postRef = doc(db, 'PostStorage', selectedPost.id);
+      if(updateTitle === "" && updateContent == ""){
+        alert("제목과 내용을 입력해주세요! ")
+        return;
+     } else if(updateTitle === ""){
+        alert("제목을 입력해주세요!")
+        return;
+    } else if(updateContent === ""){
+      alert("내용을 입력해주세요!")
+      return;
+    } else {
       await updateDoc(postRef, {
         ...selectedPost,
         title: updateTitle,
         content: updateContent
       });
+    }
     }
 
     dispatch(
