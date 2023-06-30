@@ -75,7 +75,6 @@ const Grid = styled.div`
   grid-gap: 15px;
   justify-content: center;
   place-items: center;
-  margin-top: 15px;
   margin-bottom: 50px;
   padding-top: 50px;
 

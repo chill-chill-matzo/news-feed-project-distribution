@@ -58,9 +58,10 @@ const Grid = styled.div`
   grid-gap: 15px;
   justify-content: center;
   place-items: center;
-  margin-top: 15px;
+  align-items: start;
   margin-bottom: 50px;
   padding-top: 50px;
+  min-height: 500px;
 
   @media screen and (max-width: 1100px) {
     grid-template-columns: repeat(3, minmax(200px, auto));

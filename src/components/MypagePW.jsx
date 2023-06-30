@@ -58,7 +58,6 @@ const MyPagePW = () => {
   return (
     <>
       <Container>
-        <p>비밀번호 변경</p>
         <form onSubmit={handleSubmit}>
           <InForm>
             <div>
@@ -111,11 +110,6 @@ const Container = styled.div`
   padding: 50px;
   text-align: center;
   justify-content: center;
-
-  p {
-    font-size: larger;
-    font-weight: 700;
-  }
 `;
 
 const InForm = styled.div`
