@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MyPagePost from '../components/MyPagePost';
 import MyPageLike from '../components/MypageLike';
 import MyPagePW from '../components/MypagePW';
 import { styled } from 'styled-components';
 import { GrayButton } from '../shared/Buttons';
+import ProfileModal from '../components/ProfileModal';
+import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
+import { db } from '../firebase';
+import { useParams } from 'react-router-dom';
 
 const MyPage = () => {
   const users = useSelector((state) => state.users);
   const [user] = users;
 
+  const params = useParams();
+
   const [clickedBtn, setClickedBtn] = useState('my-post-btn');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [profile, setProfile] = useState([]);
 
   const isActive = (id) => {
     return clickedBtn === id;
@@ -20,11 +28,43 @@ const MyPage = () => {
     setClickedBtn(event.target.id);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, 'ProfileStorage'), orderBy('time', 'desc'));
+      const querySnapshot = await getDocs(q);
+      const initialProfileStorage = [];
+      querySnapshot.forEach((doc) => {
+        const data = {
+          id: doc.id,
+          ...doc.data()
+        };
+
+        initialProfileStorage.push(data);
+      });
+      setProfile(initialProfileStorage);
+    };
+    fetchData();
+  }, []);
+
+  const myProfileList = profile.filter((profileItem) => {
+    return profileItem.user.id === user.id;
+  });
+
+  const recentProfile = myProfileList[0];
+  console.log('전체프로필', myProfileList);
+  console.log('최신 프로필', recentProfile);
+
   return (
     <>
       <div>
         <Info>
-          <Image></Image>
+          {myProfileList && recentProfile && (
+            <Profile onClick={() => setIsModalOpen((prev) => !prev)}>
+              <Image src={recentProfile.photoURL || undefined} alt="" />
+            </Profile>
+          )}
+          {isModalOpen && <ProfileModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} user={user} />}
+
           {user && (
             <div>
               <Name>{user.name}님, 안녕하세요!</Name>
@@ -34,13 +74,13 @@ const MyPage = () => {
         </Info>
 
         <Options>
-          <Button onClick={clickButton} active={isActive('my-post-btn')} id="my-post-btn">
+          <Button onClick={clickButton} active={isActive('my-post-btn') ? 'true' : undefined} id="my-post-btn">
             내 글 목록
           </Button>
-          <Button onClick={clickButton} active={isActive('like-btn')} id="like-btn">
+          <Button onClick={clickButton} active={isActive('like-btn') ? 'true' : undefined} id="like-btn">
             좋아요
           </Button>
-          <Button onClick={clickButton} active={isActive('change-pw-btn')} id="change-pw-btn">
+          <Button onClick={clickButton} active={isActive('change-pw-btn') ? 'true' : undefined} id="change-pw-btn">
             비밀번호 변경
           </Button>
         </Options>
@@ -61,11 +101,18 @@ const Info = styled.div`
   padding: 20px 70px;
 `;
 
-const Image = styled.div`
-  width: 90px;
-  height: 90px;
-  background-color: var(--color_blue2);
+const Profile = styled.div`
+  width: 100px;
+  height: 100px;
   border-radius: 100px;
+  overflow: hidden;
+  border: 4px solid var(--color_gray2);
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const Name = styled.p`

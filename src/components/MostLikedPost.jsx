@@ -44,7 +44,7 @@ function MostLikedPost() {
 
         return (
           <div key={post.id}>
-            <MostLikedImage imageLink={post.imageLink} onClick={postClickHandler}>
+            <MostLikedImage image={post.imageLink} onClick={postClickHandler}>
               <h1>👑 명 예 의 전 당 👑</h1>
               <p>최고 인기글에 도전해보세요!</p>
             </MostLikedImage>
@@ -65,7 +65,7 @@ const MostLikedImage = styled.div`
   width: 100%;
   height: 420px;
   border-radius: 10px;
-  background-image: url(${(props) => props.imageLink});
+  background-image: url(${(props) => props.image});
   background-size: 100%, cover;
   background-position: center;
 
