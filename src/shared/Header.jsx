@@ -22,14 +22,25 @@ function Header() {
     window.location.href = '/';
   };
 
+  const handleAddPostClick = () => {
+    if (user === undefined) {
+      setIsLogInOpen(true);
+    } else {
+      navigate('addpost');
+    }
+  };
+
   if (user === undefined) {
     return (
       <>
         <StyledAside>
-          <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
-          {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
-          <TextButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</TextButton>
-          {isSignUpOpen && <Modal type="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
+          <div></div>
+          <div>
+            <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
+            {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
+            <TextButton onClick={() => setIsSignUpOpen((prev) => !prev)}>회원가입</TextButton>
+            {isSignUpOpen && <Modal type="signUp" isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen} />}
+          </div>
         </StyledAside>
       </>
     );
@@ -37,8 +48,11 @@ function Header() {
     return (
       <>
         <StyledAside>
-          <TextButton onClick={() => navigate('mypage')}>마이페이지</TextButton>
-          <TextButton onClick={SignOut}>로그아웃</TextButton>
+          <TextButton onClick={handleAddPostClick}>새 글 작성</TextButton>
+          <div>
+            <TextButton onClick={() => navigate(`mypage/${user.id}`)}>마이페이지</TextButton>
+            <TextButton onClick={SignOut}>로그아웃</TextButton>
+          </div>
         </StyledAside>
       </>
     );
@@ -50,12 +64,11 @@ export default Header;
 const StyledAside = styled.aside`
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: space-between;
 
   height: 35px;
 
-  padding: 5px;
-  padding-right: 12px;
+  padding: 5px 12px;
   gap: 7px;
 
   background-color: var(--color_white1);

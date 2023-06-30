@@ -4,12 +4,11 @@ import { styled } from 'styled-components';
 import '../color.css';
 import { Input } from '../shared/Input';
 import { BlueButton, GrayButton } from '../shared/Buttons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { auth } from '../firebase';
 import {
   browserSessionPersistence,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   setPersistence,
   signInWithEmailAndPassword,
   updateProfile
@@ -24,12 +23,6 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      console.log('사용자 정보 user', user);
-    });
-  }, []);
 
   const onChange = (event) => {
     const {
@@ -58,6 +51,7 @@ const Modal = ({ type, isOpen, setIsOpen }) => {
       const errorMessage = error.message;
       console.log('회원가입 에러', errorCode, errorMessage);
     }
+    setIsOpen(false);
   };
 
   const SignIn = async (event) => {

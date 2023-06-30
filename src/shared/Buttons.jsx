@@ -27,6 +27,7 @@ const Blue = styled.button`
 
   &:hover {
     background-color: var(--color_blue1);
+    transition: all 0.3s;
   }
 `;
 
@@ -44,6 +45,7 @@ const Gray = styled.button`
 
   &:hover {
     background-color: var(--color_gray1);
+    transition: all 0.3s;
   }
 `;
 

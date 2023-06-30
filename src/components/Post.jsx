@@ -1,25 +1,36 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-function Post({ title, image }) {
+function Post({ ...props }) {
   return (
-    <StDiv>
-      <Img src={image} alt={title}></Img>
-      <p>&nbsp;{title}&nbsp;</p>
-    </StDiv>
+    <Div {...props}>
+      <Img src={props.image} alt={props.title}></Img>
+      <p>&nbsp;{props.title}&nbsp;</p>
+    </Div>
   );
 }
 
 export default Post;
 
-const StDiv = styled.div`
-  display: flex;
+const Div = styled.div`
+  display: block;
   flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--color_gray2);
+  border-radius: 12px;
+  &:hover {
+    border-color: var(--color_gray1);
+  }
 
   p {
-    margin-top: 10px;
+    width: 200px;
+    margin: 5px auto 5px;
     text-align: center;
     font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -28,4 +39,9 @@ const Img = styled.img`
   align-items: center;
   width: 230px;
   height: 230px;
+  object-fit: cover;
+  &:hover {
+    opacity: 0.8;
+    transition: all 0.5s ease;
+  }
 `;

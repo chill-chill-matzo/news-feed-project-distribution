@@ -1,12 +1,12 @@
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import users from '../modules/users';
+import post from '../modules/post';
 
-// Store
 const rootReducer = combineReducers({
-  users
+  users,
+  post
 });
 const store = createStore(rootReducer);
-// console.log('스토어 값입니다', store);
 
 export default store;

@@ -1,38 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import MostLikedPost from '../components/MostLikedPost';
 import NewestPost from '../components/NewestPost';
-import { GrayButton } from '../shared/Buttons';
-import { useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
+import Modal from '../components/Modal';
 
 function Main() {
-  const navigate = useNavigate();
+  const [isLogInOpen, setIsLogInOpen] = useState(false);
+
   return (
     <>
       <MostLikedPost />
-      <Button
-        onClick={() => {
-          navigate('addpost');
-        }}
-      >
-        새 글 작성
-      </Button>
-      <Button
-        onClick={() => {
-          navigate('detail');
-        }}
-      >
-        상세
-      </Button>
+      {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
+
       <NewestPost />
     </>
   );
 }
 
 export default Main;
-
-const Button = styled(GrayButton)`
-  margin: 10px auto;
-  padding: 10px 25px;
-  width: fit-content;
-`;

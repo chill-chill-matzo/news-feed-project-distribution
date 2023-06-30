@@ -6,19 +6,11 @@ export function Input({ ...props }) {
 }
 
 export function TitleInput({ children, ...props }) {
-  return (
-    <Title {...props} placeholder="제목을 입력하세요">
-      {children}
-    </Title>
-  );
+  return <Title {...props}>{children}</Title>;
 }
 
 export function ContentInput({ children, ...props }) {
-  return (
-    <Content {...props} placeholder="내용을 입력하세요">
-      {children}
-    </Content>
-  );
+  return <Content {...props}>{children}</Content>;
 }
 
 const TextInput = styled.input`

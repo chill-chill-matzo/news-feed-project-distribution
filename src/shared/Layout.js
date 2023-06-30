@@ -42,7 +42,8 @@ const StyledLayout = styled.div`
 
 const Container = styled.div`
   width: 90%;
-  height: 90%;
+  height: fit-content;
+
   background-color: var(--color_white1);
 `;
 
