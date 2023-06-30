@@ -61,7 +61,6 @@ const MostLikedImage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // object-fit: cover;
   width: 100%;
   height: 350px;
   position: relative;
