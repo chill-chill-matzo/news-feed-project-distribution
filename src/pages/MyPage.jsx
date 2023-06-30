@@ -92,4 +92,5 @@ const Button = styled(GrayButton)`
   height: 35px;
   padding: 10px 15px;
   background-color: ${props => props.active ? 'var(--color_blue2)' : null};
+  &:hover {background-color: ${props => props.active ? 'var(--color_blue1)' : null};}
 `;
