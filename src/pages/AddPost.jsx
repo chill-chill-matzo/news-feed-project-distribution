@@ -61,10 +61,6 @@ const AddPost = () => {
     if (imageFile === 0) {
       return;
     } else {
-      const {
-        currentTarget: { files }
-      } = event;
-
       const imagePreview = event.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(imagePreview);
@@ -75,40 +71,41 @@ const AddPost = () => {
   };
 
   const handleUpload = async () => {
-    try{
-    const imageRef = ref(storage, `${auth.currentUser.uid}/${imageFile.name}`);
-    await uploadBytes(imageRef, imageFile);
-    const downloadURL = await getDownloadURL(imageRef);
-    if (downloadURL !== null) {
-      return downloadURL;
+    try {
+      const imageRef = ref(storage, `${auth.currentUser.uid}/${imageFile.name}`);
+      await uploadBytes(imageRef, imageFile);
+      const downloadURL = await getDownloadURL(imageRef);
+      if (downloadURL !== null) {
+        return downloadURL;
+      }
+    } catch (error) {
+      alert('맛집 사진을 추가해주세요!');
     }
-    } catch(error) {
-      alert("맛집 사진을 추가해주세요!")
-    } 
   };
 
   const addNewPost = async (event) => {
     event.preventDefault();
-    if(title === "" && content ==="") {alert("제목과 내용을 입력해주세요!")}
-    else if (title === "") {
-      alert("제목을 입력해주세요!")
-  } else if(content === ""){
-    alert("내용을 입력해주세요!")
-  } else {const imageLink = await handleUpload();
-      console.log(imageLink)
+    if (title === '' && content === '') {
+      alert('제목과 내용을 입력해주세요!');
+    } else if (title === '') {
+      alert('제목을 입력해주세요!');
+    } else if (content === '') {
+      alert('내용을 입력해주세요!');
+    } else {
+      const imageLink = await handleUpload();
       const collectionRef = collection(db, 'PostStorage');
       const newPost = { title, content, like, imageLink, time, user };
-    try{
-      await addDoc(collectionRef, newPost);
-      setPostStorage((prev) => {
-        return [...postStorage, newPost];
-      });
-      setTitle('');
-      setContent('');
-      navigate('/');
-    } catch(error) {console.log("addDoc 에러!")}
-
-    
+      try {
+        await addDoc(collectionRef, newPost);
+        setPostStorage((prev) => {
+          return [...postStorage, newPost];
+        });
+        setTitle('');
+        setContent('');
+        navigate('/');
+      } catch (error) {
+        console.log('addDoc 에러!');
+      }
     }
   };
 
@@ -121,7 +118,7 @@ const AddPost = () => {
         <TitleInput name="title" value={title} onChange={onChange} placeholder="제목을 입력하세요" required />
         <ContentInput name="content" value={content} onChange={onChange} placeholder="내용을 입력하세요" required />
         <div>
-          <View src={imagePreview ? imagePreview : null} alt="" />
+          <View src={imagePreview || undefined} alt="" />
         </div>
         <ButtonsContainer>
           <BlueLabel htmlFor="file">파일 업로드</BlueLabel>
