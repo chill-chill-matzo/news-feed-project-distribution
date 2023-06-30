@@ -37,7 +37,7 @@ function Header() {
     return (
       <>
         <StyledAside>
-          <TextButton onClick={() => navigate('mypage')}>마이페이지</TextButton>
+          <TextButton onClick={() => navigate(`mypage/${user.id}`)}>마이페이지</TextButton>
           <TextButton onClick={SignOut}>로그아웃</TextButton>
         </StyledAside>
       </>
