@@ -34,19 +34,19 @@ const MyPage = () => {
         </Info>
 
         <Options>
-          <Button onClick={clickButton} active={isActive('like-btn')} id="like-btn">
-            좋아요
-          </Button>
           <Button onClick={clickButton} active={isActive('my-post-btn')} id="my-post-btn">
             내 글 목록
+          </Button>
+          <Button onClick={clickButton} active={isActive('like-btn')} id="like-btn">
+            좋아요
           </Button>
           <Button onClick={clickButton} active={isActive('change-pw-btn')} id="change-pw-btn">
             비밀번호 변경
           </Button>
         </Options>
       </div>
-      {isActive('like-btn') ? <MyPageLike /> : null}
       {isActive('my-post-btn') ? <MyPagePost /> : null}
+      {isActive('like-btn') ? <MyPageLike user={user} /> : null}
       {isActive('change-pw-btn') ? <MyPagePW /> : null}
     </>
   );
