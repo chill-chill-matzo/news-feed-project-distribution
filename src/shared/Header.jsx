@@ -34,6 +34,7 @@ function Header() {
     return (
       <>
         <StyledAside>
+          <div></div>
           <div>
             <TextButton onClick={() => setIsLogInOpen((prev) => !prev)}>로그인</TextButton>
             {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
