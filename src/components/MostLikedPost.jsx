@@ -43,12 +43,12 @@ function MostLikedPost() {
         };
 
         return (
-          <>
-            <MostLikedImage key={post.id} onClick={postClickHandler}>
-              <img key={post.id} src={post.imageLink} alt="" />
+          <div key={post.id}>
+            <MostLikedImage onClick={postClickHandler}>
+              <img src={post.imageLink} alt="" />
             </MostLikedImage>
             {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
-          </>
+          </div>
         );
       })}
     </>
