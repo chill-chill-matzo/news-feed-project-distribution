@@ -47,7 +47,8 @@ const MyPagePW = () => {
       setNewPassword('');
       setConfirmPassword('');
       setErrorMessage('');
-      console.log('비밀번호 변경 성공');
+      alert('비밀번호를 변경했습니다');
+      window.location.reload();
     } catch (error) {
       setErrorMessage('비밀번호 변경에 실패했습니다. 현재 비밀번호를 확인해주세요.');
       console.log('비밀번호 변경 실패', error);
@@ -57,41 +58,43 @@ const MyPagePW = () => {
   return (
     <>
       <Container>
-        <h2>비밀번호 변경</h2>
+        <p>비밀번호 변경</p>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="currentPassword">현재 비밀번호</label>
-            <Input
-              type="password"
-              id="currentPassword"
-              name="currentPassword"
-              value={currentPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="newPassword">새로운 비밀번호</label>
-            <Input
-              type="password"
-              id="newPassword"
-              name="newPassword"
-              value={newPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="confirmPassword">비밀번호 확인</label>
-            <Input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          <InForm>
+            <div>
+              <label htmlFor="currentPassword">현재 비밀번호</label>
+              <Input
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                value={currentPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="newPassword">새로운 비밀번호</label>
+              <Input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                value={newPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword">비밀번호 확인</label>
+              <Input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </InForm>
           <BlueButton type="submit">비밀번호 변경</BlueButton>
         </form>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
@@ -108,9 +111,21 @@ const Container = styled.div`
   padding: 50px;
   text-align: center;
   justify-content: center;
+
+  p {
+    font-size: larger;
+    font-weight: 700;
+  }
+`;
+
+const InForm = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: right;
 `;
 
 const ErrorMessage = styled.div`
-  color: red;
-  margin-top: 10px;
+  color: var(--color_red);
+  margin-top: 20px;
 `;
