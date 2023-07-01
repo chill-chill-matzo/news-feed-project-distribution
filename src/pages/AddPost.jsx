@@ -4,11 +4,9 @@ import { styled } from 'styled-components';
 import { addDoc, collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
-
 import { useSelector } from 'react-redux';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage, auth } from '../firebase';
-
 import { useNavigate } from 'react-router-dom';
 
 const AddPost = () => {

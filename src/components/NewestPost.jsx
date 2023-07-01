@@ -15,7 +15,7 @@ function NewestPost() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, 'PostStorage'), orderBy('time', 'desc'));
+      const q = query(collection(db, 'PostStorage'));
       const querySnapshot = await getDocs(q);
       const initialPostStorage = [];
       querySnapshot.forEach((doc) => {
@@ -23,7 +23,31 @@ function NewestPost() {
           id: doc.id,
           ...doc.data()
         };
+
+        if (data.time) {
+          const convertedTime = new Date(data.time);
+          const options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+          };
+          const formattedTime = convertedTime.toLocaleString('en-US', options);
+          console.log('정렬한 시간', formattedTime);
+          data.time = formattedTime;
+        }
+
         initialPostStorage.push(data);
+        initialPostStorage.sort(function (a, b) {
+          if (a.time && b.time) {
+            return new Date(b.time) - new Date(a.time);
+          } else {
+            return 0;
+          }
+        });
       });
       setPostStorage(initialPostStorage);
     };

@@ -46,13 +46,10 @@ const ProfileModal = ({ isModalOpen, setIsModalOpen, user }) => {
     event.preventDefault();
 
     const photoURL = await handleUpload();
-    console.log('업로드한 유알엘', photoURL);
-
     const collectionRef = collection(db, 'ProfileStorage');
     const newProfile = { user, photoURL, time };
     try {
       await addDoc(collectionRef, newProfile);
-
       window.location.reload();
     } catch (error) {
       const errorCode = error.code;
