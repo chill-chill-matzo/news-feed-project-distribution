@@ -95,4 +95,8 @@ const Grid = styled.div`
   @media screen and (max-width: 850px) {
     grid-template-columns: repeat(2, minmax(200px, auto));
   }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(1, minmax(200px, auto));
+  }
 `;
