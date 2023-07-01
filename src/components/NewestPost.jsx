@@ -36,7 +36,7 @@ function NewestPost() {
             hour12: true
           };
           const formattedTime = convertedTime.toLocaleString('en-US', options);
-          console.log('정렬한 시간', formattedTime);
+
           data.time = formattedTime;
         }
 
