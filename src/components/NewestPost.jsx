@@ -1,4 +1,4 @@
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { styled } from 'styled-components';
@@ -90,5 +90,9 @@ const Grid = styled.div`
 
   @media screen and (max-width: 1100px) {
     grid-template-columns: repeat(3, minmax(200px, auto));
+  }
+
+  @media screen and (max-width: 850px) {
+    grid-template-columns: repeat(2, minmax(200px, auto));
   }
 `;
