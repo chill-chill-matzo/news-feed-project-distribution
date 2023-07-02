@@ -33,7 +33,6 @@ const StyledLayout = styled.div`
   align-items: center;
 
   max-width: 1200px;
-  min-width: 800px;
 
   margin: 0 auto;
 

@@ -5,7 +5,7 @@ function Post({ ...props }) {
   return (
     <Div {...props}>
       <Img src={props.image} alt={props.title}></Img>
-      <p>&nbsp;{props.title}&nbsp;</p>
+      <p>{props.title}</p>
     </Div>
   );
 }
@@ -14,7 +14,6 @@ export default Post;
 
 const Div = styled.div`
   display: block;
-  flex-direction: column;
   overflow: hidden;
   cursor: pointer;
   border: 2px solid var(--color_gray2);

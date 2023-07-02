@@ -27,31 +27,36 @@ const MyPagePW = () => {
     if (newPassword !== confirmPassword) {
       setErrorMessage('비밀번호가 일치하지 않습니다.');
       return;
-    }
-
-    const confirmed = window.confirm('비밀번호를 변경하시겠습니까?');
-
-    if (!confirmed) {
+    } else if (newPassword.length <= 5 || confirmPassword.length <= 5) {
+      setErrorMessage('비밀번호는 6자리 이상 입력해주세요.');
       return;
-    }
+    } else if (currentPassword === newPassword) {
+      setErrorMessage('현재 비밀번호와 일치합니다. 새로운 비밀번호를 다시 입력해주세요.');
+    } else {
+      const result = window.confirm('비밀번호를 변경하시겠습니까?');
 
-    try {
-      const auth = getAuth();
-      const user = auth.currentUser;
-      const credentials = EmailAuthProvider.credential(user.email, currentPassword);
+      if (result === true) {
+        try {
+          const auth = getAuth();
+          const user = auth.currentUser;
+          const credentials = EmailAuthProvider.credential(user.email, currentPassword);
 
-      await reauthenticateWithCredential(user, credentials);
-      await updatePassword(user, newPassword);
+          await reauthenticateWithCredential(user, credentials);
+          await updatePassword(user, newPassword);
 
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-      setErrorMessage('');
-      alert('비밀번호를 변경했습니다');
-      window.location.reload();
-    } catch (error) {
-      setErrorMessage('비밀번호 변경에 실패했습니다. 현재 비밀번호를 확인해주세요.');
-      console.log('비밀번호 변경 실패', error);
+          setCurrentPassword('');
+          setNewPassword('');
+          setConfirmPassword('');
+          setErrorMessage('');
+          alert('비밀번호를 변경했습니다');
+          window.location.reload();
+        } catch (error) {
+          setErrorMessage('비밀번호 변경에 실패했습니다. 현재 비밀번호를 확인해주세요.');
+          console.log('비밀번호 변경 실패', error);
+        }
+      } else if (result === false) {
+        alert('비밀번호 변경을 취소합니다');
+      }
     }
   };
 
@@ -62,34 +67,37 @@ const MyPagePW = () => {
           <InForm>
             <div>
               <label htmlFor="currentPassword">현재 비밀번호</label>
-              <Input
+              <PasswordInput
                 type="password"
                 id="currentPassword"
                 name="currentPassword"
                 value={currentPassword}
                 onChange={handleChange}
+                placeholder="현재 비밀번호를 입력해주세요"
                 required
               />
             </div>
             <div>
               <label htmlFor="newPassword">새로운 비밀번호</label>
-              <Input
+              <PasswordInput
                 type="password"
                 id="newPassword"
                 name="newPassword"
                 value={newPassword}
                 onChange={handleChange}
+                placeholder="6자 이상 입력해주세요"
                 required
               />
             </div>
             <div>
               <label htmlFor="confirmPassword">비밀번호 확인</label>
-              <Input
+              <PasswordInput
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={handleChange}
+                placeholder="새로운 비밀번호를 다시 입력해주세요"
                 required
               />
             </div>
@@ -122,4 +130,8 @@ const InForm = styled.div`
 const ErrorMessage = styled.div`
   color: var(--color_red);
   margin-top: 20px;
+`;
+
+const PasswordInput = styled(Input)`
+  width: 250px;
 `;

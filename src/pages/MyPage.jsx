@@ -6,15 +6,13 @@ import MyPagePW from '../components/MypagePW';
 import { styled } from 'styled-components';
 import { GrayButton } from '../shared/Buttons';
 import ProfileModal from '../components/ProfileModal';
-import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useParams } from 'react-router-dom';
+import { IconCherry } from '../shared/IconCherry';
 
 const MyPage = () => {
   const users = useSelector((state) => state.users);
   const [user] = users;
-
-  const params = useParams();
 
   const [clickedBtn, setClickedBtn] = useState('my-post-btn');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,8 +49,6 @@ const MyPage = () => {
   });
 
   const recentProfile = myProfileList[0];
-  console.log('전체프로필', myProfileList);
-  console.log('최신 프로필', recentProfile);
 
   return (
     <>
@@ -61,6 +57,13 @@ const MyPage = () => {
           {myProfileList && recentProfile && (
             <Profile onClick={() => setIsModalOpen((prev) => !prev)}>
               <Image src={recentProfile.photoURL || undefined} alt="" />
+            </Profile>
+          )}
+          {myProfileList.length === 0 && (
+            <Profile onClick={() => setIsModalOpen((prev) => !prev)}>
+              <ImageDiv>
+                <IconCherry />
+              </ImageDiv>
             </Profile>
           )}
           {isModalOpen && <ProfileModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} user={user} />}
@@ -113,6 +116,14 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+const ImageDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-top: 20px;
+  padding-right: 10px;
 `;
 
 const Name = styled.p`
