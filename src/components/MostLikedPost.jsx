@@ -25,35 +25,33 @@ function MostLikedPost() {
         initialPostStorage.push(data);
       });
       setPostStorage(initialPostStorage);
+      console.log('가져온 데이터들', initialPostStorage);
     };
     fetchData();
   }, []);
 
+  const post = postStorage[0];
+
   const navigate = useNavigate();
 
+  const postClickHandler = () => {
+    if (user === undefined) {
+      setIsLogInOpen(true);
+    } else {
+      navigate(`detail/${post.id}`);
+    }
+  };
+
   return (
-    <>
-      {postStorage.map((post) => {
-        const postClickHandler = () => {
-          if (user === undefined) {
-            setIsLogInOpen(true);
-          } else {
-            navigate(`detail/${post.id}`);
-          }
-        };
-
-        return (
-          <div key={post.id}>
-            <MostLikedImage image={post.imageLink} onClick={postClickHandler}>
-              <h1>👑 명 예 의 전 당 👑</h1>
-              <p>최고 인기글에 도전해보세요!</p>
-            </MostLikedImage>
-
-            {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
-          </div>
-        );
-      })}
-    </>
+    <div>
+      {post && (
+        <MostLikedImage image={post.imageLink} onClick={postClickHandler}>
+          <h1>👑 명 예 의 전 당 👑</h1>
+          <p>최고 인기글에 도전해보세요!</p>
+        </MostLikedImage>
+      )}
+      {isLogInOpen && <Modal type="signIn" isOpen={isLogInOpen} setIsOpen={setIsLogInOpen} />}
+    </div>
   );
 }
 
