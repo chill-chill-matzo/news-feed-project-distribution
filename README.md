@@ -145,3 +145,4 @@ const people = {
   transition: 300ms;
 }
 ```
+# news-feed-project-distribution
